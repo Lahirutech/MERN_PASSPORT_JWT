@@ -4,6 +4,7 @@ const UsersController = require('../controllers/users');
 const UserModel = require('../models/user.model');
 const { hashSync, compareSync } = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { jwtUserAuth, checkRole } = require('../utils/Auth.utils');
 
 router.post('/login', (req, res) => {
     UserModel.findOne({ email: req.body.email }).then(user => {
@@ -69,4 +70,19 @@ router.post('/register', async(req, res, next) => {
         res.status(500).send(error)
     }
 })
+
+// Admin Protected Route
+router.get(
+    '/user-protectd',
+    jwtUserAuth,
+    checkRole(["user"]),
+    async(req, res) => {
+        return res.json("Hello User");
+    }
+);
+
+
+
+
+
 module.exports = router

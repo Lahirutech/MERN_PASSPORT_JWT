@@ -5,7 +5,6 @@ const UserModel = require('../models/user.model');
 const { hashSync, compareSync } = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 router.post('/login', (req, res) => {
     UserModel.findOne({ email: req.body.email }).then(user => {
         if (!user) {

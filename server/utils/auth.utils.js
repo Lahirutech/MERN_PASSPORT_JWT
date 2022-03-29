@@ -6,6 +6,7 @@ const passport = require("passport");
  */
 const jwtUserAuth = passport.authenticate("jwt", { session: false });
 
+
 module.exports = {
     jwtUserAuth
 }

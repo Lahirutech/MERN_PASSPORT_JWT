@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
             id: user._id
         }
 
-        const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
+        const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1d" })
         return res.status(200).send({
             success: true,
             message: "Logged in successfully!",
@@ -40,14 +40,14 @@ router.post('/login', (req, res) => {
 router.post('/register', async(req, res, next) => {
     try {
         const { email } = req.body;
-        const doesExist = await User.findOne({ email });
+        const doesExist = await UserModel.findOne({ email });
         if (doesExist) {
             return res.status(200).json({
                 success: true,
                 redirectUrl: '/'
             })
         }
-        const user = new User(req.body);
+        const user = new UserModel(req.body);
         await user.save().then(user => {
             res.send({
                 success: true,

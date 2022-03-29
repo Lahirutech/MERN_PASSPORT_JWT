@@ -14,12 +14,11 @@ router.post('/login', (req, res) => {
                 message: "Could not find the user."
             })
         }
-
         //Incorrect password
         if (!compareSync(req.body.password, user.password)) {
             return res.status(401).send({
                 success: false,
-                message: "Incorrect password"
+                message: "Incorrect credentials"
             })
         }
 
@@ -29,7 +28,6 @@ router.post('/login', (req, res) => {
         }
 
         const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
-
         return res.status(200).send({
             success: true,
             message: "Logged in successfully!",

@@ -1,6 +1,4 @@
 const { jwtUserAuth } = require("../utils/Auth.utils");
-
-
 const router = require("express-promise-router")()
 
 router.get(

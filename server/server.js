@@ -6,14 +6,11 @@ const morgan = require("morgan");
 
 const passport = require("passport");
 
-
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5001;
 app.use(cors());
 app.use(passport.initialize());
 require('./middleware/passport')
-
-
 
 app.use(express.json());
 // app.use(require("./routes/record")); 
@@ -27,8 +24,6 @@ app.use(morgan('dev'))
 app.use('/user', require('./routes/user.routes'))
 app.use('/admin', require('./routes/admin.routes'))
 
-
-
 app.get('/foo', function(req, res) {
     res.send("triggered foo")
 })
@@ -37,7 +32,6 @@ mongoose
     .connect(process.env.ATLAS_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-
     })
     .then(() => console.log("db Connected"));
 

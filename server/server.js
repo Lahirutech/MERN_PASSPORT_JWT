@@ -23,6 +23,8 @@ app.use(morgan('dev'))
 //Routes
 app.use('/user', require('./routes/user.routes'))
 app.use('/admin', require('./routes/admin.routes'))
+app.use('/auth', require('./routes/auth.routes'))
+
 
 app.get('/foo', function(req, res) {
     res.send("triggered foo")

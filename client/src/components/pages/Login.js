@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   const submit = () => {
     console.log(username, password);
@@ -12,6 +14,7 @@ export default function Login() {
       .then((user) => {
         console.log(user);
         localStorage.setItem("token", user.data.token);
+        navigate("/protected");
       })
       .catch((err) => {
         console.log(err);

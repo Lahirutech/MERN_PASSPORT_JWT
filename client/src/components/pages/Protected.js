@@ -18,7 +18,7 @@ export default function Protected() {
       })
       .catch((err) => {
         console.log(err);
-        //navigate("/login");
+        navigate("/login");
       });
   }, []);
   return <div> Protected </div>;

@@ -11,6 +11,7 @@ export default function Login() {
       .post("http://localhost:5001/user/login", { username, password })
       .then((user) => {
         console.log(user);
+        localStorage.setItem("token", user.data.token);
       })
       .catch((err) => {
         console.log(err);

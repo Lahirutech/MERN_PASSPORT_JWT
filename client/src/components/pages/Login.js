@@ -7,10 +7,6 @@ export default function Login() {
 
   const submit = () => {
     console.log(username, password);
-    const userData = {
-      email: username,
-      password: password,
-    };
     axios
       .post("http://localhost:5001/user/login", { username, password })
       .then((user) => {

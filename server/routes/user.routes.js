@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const { jwtUserAuth, checkRole } = require('../utils/Auth.utils');
 
 router.post('/login', (req, res) => {
-    UserModel.findOne({ email: req.body.email }).then(user => {
+    UserModel.findOne({ email: req.body.username }).then(user => {
         if (!user) {
             return res.status(401).send({
                 success: false,

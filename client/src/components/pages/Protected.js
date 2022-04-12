@@ -21,5 +21,5 @@ export default function Protected() {
         navigate("/login");
       });
   }, []);
-  return <div> Protected </div>;
+  return <div> Protected  component</div>;
 }

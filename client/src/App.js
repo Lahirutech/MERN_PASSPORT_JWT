@@ -11,11 +11,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          {/* <Route
-            path="/protected"
-            
-            element={<PrivateRoute roles={["CLIENT", "ADMIN"]}> <Protected /> </PrivateRoute>}
-          /> */}
           <Route
           path="/protected"
           element={

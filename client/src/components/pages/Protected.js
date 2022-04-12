@@ -6,7 +6,7 @@ export default function Protected() {
   let navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("token", token);
+    console.log("protected loaded");
     axios
       .get("http://localhost:5001/auth/protected", {
         headers: {
@@ -14,7 +14,7 @@ export default function Protected() {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log("response",res);
       })
       .catch((err) => {
         console.log(err);

@@ -20,7 +20,7 @@ router.get(
   "/authenticated",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("req", req.user);
+    console.log("request authenticated", req.user);
     const { email, role } = req.user;
     res.status(200).json({ isAuthenticated: true, user: { email, role } });
   }

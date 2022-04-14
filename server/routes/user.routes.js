@@ -21,6 +21,8 @@ router.post('/login', (req, res) => {
                 message: "Incorrect credentials"
             })
         }
+        console.log("user", user)
+        const {_id,email,role} = user
 
         const payload = {
             email: user.email,
@@ -31,11 +33,13 @@ router.post('/login', (req, res) => {
         return res.status(200).send({
             success: true,
             message: "Logged in successfully!",
-            token: "Bearer " + token
+            token: "Bearer " + token,
+            isAuthenticated: true,
+            user: {username:email,role,_id}
         })
 
     })
-})
+}) 
 
 router.post('/register', async(req, res, next) => {
     try {

@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 const PrivateRoute = ({ children, roles }) => {
   const { isAuthenticated, user } = useContext(AuthContext);
-  console.log("props")
+  console.log("pvt routes got hit")
   
   if (!isAuthenticated) { 
     return <Navigate to="/login" replace />;

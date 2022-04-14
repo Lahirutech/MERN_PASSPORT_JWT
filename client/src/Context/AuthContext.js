@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import AuthService from "../Services/AuthService";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(); 
 
 export default ({ children }) => {
   const [user, setUser] = useState(null);
@@ -9,6 +9,7 @@ export default ({ children }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("Authcontext useeffect trigered")
     const token = localStorage.getItem("token");
     console.log(token);
     AuthService.isAuthenticated(token).then((data) => {

@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../../Services/AuthService";
+import {AuthContext} from "../../Context/AuthContext";
 
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState(null);
+    
+    const authContext = useContext(AuthContext);
+
+
     let navigate = useNavigate();
 
     const submit = () => {
         console.log(username, password);
-        axios
-            .post("http://localhost:5001/user/login", { username, password })
-            .then((user) => {
-                console.log(user);
-                localStorage.setItem("token", user.data.token);
+        let user = {username:username,password:password}
+        AuthService.login(user).then(data=>{
+            console.log(data);
+            const { isAuthenticated,user,message} = data;
+            if (isAuthenticated) {
+                console.log("user",user)
+                authContext.setUser(user);
+                authContext.setIsAuthenticated(isAuthenticated);
                 navigate("/protected");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            }
+            else
+                setMessage(message);
+        });
+            
     };
 
     return ( <

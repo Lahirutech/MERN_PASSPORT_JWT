@@ -1,6 +1,6 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 import AuthService from "../../Services/AuthService";
 import {AuthContext} from "../../Context/AuthContext";
 
@@ -10,8 +10,15 @@ export default function Login() {
     const [message, setMessage] = useState(null);
     
     const authContext = useContext(AuthContext);
-
-
+    const { isAuthenticated, user } = useContext(AuthContext);
+    
+    useEffect(() => {
+        if (isAuthenticated) { 
+            return <Navigate to="/protectedpage" replace />;
+          }
+    }, [])
+    
+  
     let navigate = useNavigate();
 
     const submit = () => {
@@ -19,12 +26,15 @@ export default function Login() {
         let user = {username:username,password:password}
         AuthService.login(user).then(data=>{
             console.log(data);
-            const { isAuthenticated,user,message} = data;
+            const { isAuthenticated,user,message,refreshToken,token} = data;
             if (isAuthenticated) {
                 console.log("user",user)
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
-                navigate("/protected");
+                localStorage.setItem("token", token);
+                localStorage.setItem("refreshToken", refreshToken);
+                console.log("token from login",token)
+                navigate("/protectedpage");
             }
             else
                 setMessage(message);

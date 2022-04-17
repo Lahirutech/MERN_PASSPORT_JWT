@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
 import Protected from "./components/pages/Protected";
+import PrivateRoute from "./hocs/PrivateRoute";
 
-import PrivateRoute  from "./hocs/PrivateRoute";
 function App() {
   return (
     <div className="App">
@@ -12,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
-          path="/protected"
+          path="/protectedpage"
           element={
             <PrivateRoute roles={["CLIENT", "ADMIN"]}>
               <Protected />

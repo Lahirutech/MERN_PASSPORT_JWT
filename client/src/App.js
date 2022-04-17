@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
 import Protected from "./components/pages/Protected";
 import PrivateRoute from "./hocs/PrivateRoute";
+import Profile from "./components/pages/Profile";
 
 function App() {
   return (
@@ -11,10 +12,18 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
-          path="/protectedpage"
+          path="/protected"
           element={
             <PrivateRoute roles={["CLIENT", "ADMIN"]}>
               <Protected />
+            </PrivateRoute>
+          }
+          />
+            <Route
+          path="/profile" 
+          element={
+            <PrivateRoute roles={["CLIENT", "ADMIN"]}>
+              <Profile/>
             </PrivateRoute>
           }
         />

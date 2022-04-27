@@ -3,7 +3,7 @@ import { BrowserRouter,Routes,Route, Navigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 
 
-const PrivateRoute = ({ children, roles }) => {
+const PrivateRoute = ({ children, roles=["CLIENT"] }) => {
   const { isAuthenticated, user } = useContext(AuthContext);
   console.log("pvt routes got hit")
   
@@ -19,3 +19,4 @@ const PrivateRoute = ({ children, roles }) => {
 export default PrivateRoute
 
 
+  

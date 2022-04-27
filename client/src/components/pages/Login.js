@@ -11,15 +11,17 @@ export default function Login() {
     
     const authContext = useContext(AuthContext);
     const { isAuthenticated, user } = useContext(AuthContext);
-    
+    let navigate = useNavigate();
+
     useEffect(() => {
+        console.log("isAuthenticated from login",isAuthenticated)
+
         if (isAuthenticated) { 
-            return <Navigate to="/protectedpage" replace />;
-          }
+        navigate("/protected");
+}
     }, [])
     
   
-    let navigate = useNavigate();
 
     const submit = () => {
         console.log(username, password);
@@ -34,7 +36,7 @@ export default function Login() {
                 localStorage.setItem("token", token);
                 localStorage.setItem("refreshToken", refreshToken);
                 console.log("token from login",token)
-                navigate("/protectedpage");
+                navigate("/protected");
             }
             else
                 setMessage(message);
